@@ -1,7 +1,0 @@
-Error: Unable to access jarfile my-batch.jar
-log4j:INFO Using URL [jar:file:/target/my-batch.jar!/main/main.jar!/log4j.properties] for automatic log4j configuration of repository named [default].
-Hello world
-log4j:INFO Using URL [jar:file:/target/my-batch.jar!/main/main.jar!/log4j.properties] for automatic log4j configuration of repository named [default].
-Hello world
-log4j:INFO Using URL [jar:file:/target/my-batch.jar!/main/main.jar!/log4j.properties] for automatic log4j configuration of repository named [default].
-Hello world
