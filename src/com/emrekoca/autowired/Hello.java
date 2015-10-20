@@ -8,7 +8,8 @@ public class Hello {
 	static Logger logger = Logger.getLogger(Hello.class);
 	@Override
 	public String toString() {
-		logger.info("Hello log :");
+		if(logger.isDebugEnabled())
+			logger.info("Hello log :");
 		return "Hello world";
 	}
 }
