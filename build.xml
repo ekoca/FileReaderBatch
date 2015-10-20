@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="MYBatch">
+	<property environment="env" />
+
+	<taskdef name="one-jar" classname="com.simontuffs.onejar.ant.OneJarTask" classpath="lib/one-jar-ant-task-0.97.jar" onerror="report" />
+
+	<property name="src.dir" value="src" />
+	<property name="conf.dir" value="conf" />
+	<property name="bin.dir" value="bin" />
+	<property name="build.dir" value="target" />
+	<property name="incoming.dir" value="${user.home}/batch/incoming/my_rnt" />
+	<property name="success.dir" value="${user.home}/batch/incoming/my_rnt/success" />
+	<property name="error.dir" value="${user.home}/batch/incoming/my_rnt/error" />
+	<property name="log.dir" value="${user.home}/batch/logs/batch_logs" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="jar.target.dir" value="${build.dir}" />
+	<property name="external.lib.dir" value="lib" />
+	<property name="final.jar" value="${build.dir}/my-batch.jar" />
+	<property name="main.class" value="com.emrekoca.client.ClientApplication" />
+
+	<path id="project.classpath">
+		<fileset dir="${external.lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<exec executable="hostname" outputproperty="system.hostname">
+		<arg value="-s" />
+	</exec>
+
+	<target name="init">
+		<mkdir dir="${bin.dir}" />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${jar.target.dir}" />
+		<mkdir dir="${log.dir}" />
+		<mkdir dir="${incoming.dir}" />
+		<mkdir dir="${success.dir}" />
+		<mkdir dir="${error.dir}" />
+		<copy includeemptydirs="false" todir="${classes.dir}">
+			<fileset dir="${src.dir}">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${bin.dir}" />
+	</target>
+
+	<target name="config" depends="init">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" debug="on" includeantruntime="false" includejavaruntime="false" source="1.7" target="1.7">
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+		<copy file="${conf.dir}/app-${system.hostname}.properties" tofile="${classes.dir}/app.properties" overwrite="true" />
+		<copy file="${conf.dir}/log4j-${system.hostname}.properties" tofile="${classes.dir}/log4j.properties" overwrite="true" />
+	</target>
+
+	<target name="build" depends="config">
+		<delete file="${final.jar}" />
+		<one-jar destfile="${final.jar}" onejarmainclass="${main.class}">
+			<main>
+				<fileset dir="${classes.dir}" />
+			</main>
+			<lib>
+				<fileset dir="${external.lib.dir}" />
+			</lib>
+		</one-jar>
+	</target>
+</project>

@@ -1,0 +1,27 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"  
+            "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<!-- 
+	<bean id="motdService" class="com.emrekoca.motd.MessageOfTheDayBasicImpl">
+		<property name="message" value="How are you?"></property>
+	</bean>
+	-->
+	<!-- 
+	<bean id="motdService" class="com.emrekoca.motd.MessageOfTheDayDailyDynamicImpl"> 
+	</bean> 
+	-->
+	<bean id="motdService"
+		class="com.emrekoca.motd.MessageOfTheDayDynamicConfigurableImpl">
+		<property name="messageList">
+			<list>
+				<value>Sunday message</value>
+				<value>Monday</value>
+				<value>Tuesday</value>
+				<value>Wednesday</value>
+				<value>Thursday</value>
+				<value>Friday</value>
+				<value>Saturday</value>
+			</list>
+		</property>
+	</bean>
+</beans>
