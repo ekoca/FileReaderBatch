@@ -8,9 +8,9 @@
 	<property name="conf.dir" value="conf" />
 	<property name="bin.dir" value="bin" />
 	<property name="build.dir" value="target" />
-	<property name="incoming.dir" value="${user.home}/batch/incoming/my_rnt" />
-	<property name="success.dir" value="${user.home}/batch/incoming/my_rnt/success" />
-	<property name="error.dir" value="${user.home}/batch/incoming/my_rnt/error" />
+	<property name="incoming.dir" value="${user.home}/batch/incoming/" />
+	<property name="success.dir" value="${user.home}/batch/incoming/success" />
+	<property name="error.dir" value="${user.home}/batch/incoming/error" />
 	<property name="log.dir" value="${user.home}/batch/logs/batch_logs" />
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.target.dir" value="${build.dir}" />
